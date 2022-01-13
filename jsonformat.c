@@ -78,8 +78,8 @@ static void _FormatJson(char* json, size_t jsonReduce, char* res, size_t resRedu
 				type = 5;
 			else
 			{
-				/* 剔除原有格式 */
-				if (*json > ' ')
+				/* 过滤原有格式,过滤不可见字符 */
+				if (*json > ' ' && *json <= '~')
 					*res++ = *json++;
 				else
 					json++;
