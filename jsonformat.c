@@ -76,14 +76,18 @@ static void _FormatJson(char* json, size_t jsonReduce, char* res, size_t resRedu
 				type = 4;
 			else if (*json == '"')
 				type = 5;
+			/* 除以上特殊字符,在字符串之外,只拷贝数字和字母 */
+			/* 因为只剩下数字、true和false(有些语言里首字母大写) */
+			else if ((*json >= '0' &&  *json <= '9') ||
+				(*json >= 'A' &&  *json <= 'Z') ||
+				(*json >= 'a' &&  *json <= 'z'))
+			{
+				*res++ = *json++;
+				resReduce--;
+				jsonReduce--;
+			}
 			else
 			{
-				/* 过滤原有格式(指字符串之外的空格以及换行、tab等不可见字符) */
-				if (*json > ' ' && *json <= '~')
-				{
-					*res++ = *json;
-					resReduce--;
-				}
 				json++;
 				jsonReduce--;
 			}
