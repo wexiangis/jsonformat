@@ -78,13 +78,14 @@ static void _FormatJson(char* json, size_t jsonReduce, char* res, size_t resRedu
 				type = 5;
 			else
 			{
-				/* 过滤原有格式,过滤不可见字符 */
+				/* 过滤原有格式(指字符串之外的空格以及换行、tab等不可见字符) */
 				if (*json > ' ' && *json <= '~')
-					*res++ = *json++;
-				else
-					json++;
+				{
+					*res++ = *json;
+					resReduce--;
+				}
+				json++;
 				jsonReduce--;
-				resReduce--;
 			}
 		}
 		/* 特殊字符处理 */
