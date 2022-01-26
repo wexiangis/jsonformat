@@ -33,7 +33,7 @@ int main(int argc, char** argv)
 
     if (argc < 3)
     {
-        printf("Usage: %s in.json out.json space(default 4)\r\n", argv[0]);
+        printf("Usage: %s in.json out.json indentSpace(default 4)\r\n", argv[0]);
         return -1;
     }
 

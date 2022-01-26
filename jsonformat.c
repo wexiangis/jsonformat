@@ -57,10 +57,10 @@ static void _FormatJsonString(char* json, size_t jsonReduce, char* res, size_t r
 
 static void _FormatJson(char* json, size_t jsonReduce, char* res, size_t resReduce, uint32_t tab,
 	char** jsonRet, size_t* jsonReduceRet, char** resRet, size_t* resReduceRet, uint32_t* tabRet,
-	uint32_t space)
+	uint32_t indentSpace)
 {
 	uint32_t type = 9;
-	uint32_t padding = tab * space;
+	uint32_t padding = tab * indentSpace;
 	while (jsonReduce > 0 && resReduce > 0)
 	{
 		/* 特殊字符识别 */
@@ -108,14 +108,14 @@ static void _FormatJson(char* json, size_t jsonReduce, char* res, size_t resRedu
 				*res++ = '\n';
 				resReduce--;
 				tab++;
-				_FormatJson(json, jsonReduce, res, resReduce, tab, &json, &jsonReduce, &res, &resReduce, &tab, space);
+				_FormatJson(json, jsonReduce, res, resReduce, tab, &json, &jsonReduce, &res, &resReduce, &tab, indentSpace);
 				break;
 			/* 字符 "]}" 连续3步:先换行,再填充tab,再拷贝 */
 			case 2:
 				*res++ = '\n';
 				resReduce--;
 				tab--;
-				padding = tab * space;
+				padding = tab * indentSpace;
 				type = 22;
 				continue;
 			case 22:
@@ -165,7 +165,7 @@ static void _FormatJson(char* json, size_t jsonReduce, char* res, size_t resRedu
 			case 44:
 				*res++ = '\n';
 				resReduce--;
-				padding = tab * space;
+				padding = tab * indentSpace;
 				type = 9;
 				continue;
 			/* 字符 " 切换为字符串拷贝模式 */
@@ -199,7 +199,7 @@ static void _FormatJson(char* json, size_t jsonReduce, char* res, size_t resRedu
 		*tabRet = tab;
 }
 
-size_t JsonFormat(const char* json, char* buff, size_t buffSize, uint32_t space)
+size_t JsonFormat(const char* json, char* buff, size_t buffSize, uint32_t indentSpace)
 {
     uint32_t tab = 0;
     if (!json || !buff || buffSize < 1)
@@ -207,6 +207,6 @@ size_t JsonFormat(const char* json, char* buff, size_t buffSize, uint32_t space)
         return 0;
 	}
 	memset(buff, 0, buffSize);
-    _FormatJson((char*)json, strlen(json), buff, buffSize, tab, NULL, NULL, NULL, NULL, NULL, space);
+    _FormatJson((char*)json, strlen(json), buff, buffSize, tab, NULL, NULL, NULL, NULL, NULL, indentSpace);
     return strlen(buff);
 }
