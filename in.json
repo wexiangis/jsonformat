@@ -1,1 +1,1 @@
-{"int": 123,"string": "abc","array": [1, 2, 3],"object": {"array1": ["abc", "def", "ghi"],"array2":[{"name": "demo1","commit": "Hello world !"},{"name": "demo2","commit": "abc,efg"}],"txt":"\"\n\t这是一行带格式的文本,\n内含换行、tab和转义字符,\r\n正常格式化理应保留原有的样子\""}}
+{"int": -123,"string": "abc","array": [1, 2, 3],"object": {"array1": ["abc", "def", "ghi"],"array2":[{"name": "demo1","commit": "Hello world !"},{"name": "demo2","commit": "abc,efg"}],"txt":"\"\n\t这是一行带格式的文本,\n内含换行、tab和转义字符,\r\n正常格式化理应保留原有的样子\""}}

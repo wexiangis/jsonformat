@@ -80,7 +80,8 @@ static void _FormatJson(char* json, size_t jsonReduce, char* res, size_t resRedu
 			/* 因为只剩下数字、true和false(有些语言里首字母大写) */
 			else if ((*json >= '0' &&  *json <= '9') ||
 				(*json >= 'A' &&  *json <= 'Z') ||
-				(*json >= 'a' &&  *json <= 'z'))
+				(*json >= 'a' &&  *json <= 'z') ||
+				*json == '-')
 			{
 				*res++ = *json++;
 				resReduce--;
